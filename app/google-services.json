@@ -1,0 +1,75 @@
+{
+  "project_info": {
+    "project_id": "anjuman-e--husami",
+    "project_number": "256653647969",
+    "name": "Anjuman-e- Husami"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256653647969:android:30a087ab6d23e697",
+        "client_id": "android:amrit.com.myapplication",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "amrit.com.myapplication",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256653647969:android:c4774eea98a84dbd",
+        "client_id": "android:anjuman.e.husami",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "anjuman.e.husami",
+          "certificate_hash": []
+        }
+      },
+      "oauth_client": [],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 1
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
