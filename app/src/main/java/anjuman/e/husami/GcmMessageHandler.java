@@ -1,11 +1,13 @@
 package anjuman.e.husami;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.NotificationCompat;
@@ -46,12 +48,36 @@ public class GcmMessageHandler extends GcmListenerService {
 
             Context context = getBaseContext();
 
+            NotificationManager mNotificationManager = (NotificationManager) context
+                    .getSystemService(Context.NOTIFICATION_SERVICE);
+
             Intent notificationActivity = new Intent(context, NotificationActivity.class);
 
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, notificationActivity, 0);
 
-            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                    .setSmallIcon(R.drawable.ic_menu_alerts_push)
+            NotificationCompat.Builder mBuilder;
+            String NOTIFICATION_CHANNEL_ID = "my_channel_id_02";
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, "My Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+
+                // Configure the notification channel.
+                notificationChannel.setDescription("Channel description");
+                notificationChannel.enableLights(true);
+//                notificationChannel.setLightColor(Color.RED);
+                notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+                notificationChannel.enableVibration(true);
+                if (mNotificationManager != null) {
+                    mNotificationManager.createNotificationChannel(notificationChannel);
+                }
+
+                mBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID);
+            } else {
+                mBuilder = new NotificationCompat.Builder(context);
+            }
+
+
+            mBuilder.setSmallIcon(R.drawable.ic_menu_alerts_push)
                     .setColor(ContextCompat.getColor(context, R.color.colorPrimary))
                     .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
@@ -67,10 +93,9 @@ public class GcmMessageHandler extends GcmListenerService {
 
             mBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
 
-            NotificationManager mNotificationManager = (NotificationManager) context
-                    .getSystemService(Context.NOTIFICATION_SERVICE);
-
-            mNotificationManager.notify(new Random().nextInt(), mBuilder.build());
+            if (mNotificationManager != null) {
+                mNotificationManager.notify(new Random().nextInt(), mBuilder.build());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
